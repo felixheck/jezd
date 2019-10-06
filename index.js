@@ -13,12 +13,13 @@ program
   .version(version)
   .arguments('<tld>')
   .option('-t, --token <token>', 'ZEIT Now token')
-  .option('-c, --cleanup', 'remove unaliased deployments afterwards (false)', false)
+  .option('-b, --cleanup-before', 'remove unaliased deployments before')
+  .option('-a, --cleanup-afterwards', 'remove unaliased deployments afterwards')
 
 program.parse(process.argv)
 
 const [ tld ] = program.args
-const { cleanup, token } = program
+const { cleanupBefore, cleanupAfterwards, token } = program
 const tkn = token ? [`--token=${token}`] : []
 const now = (...args) => execa('now', [...tkn, ...args])
 
@@ -36,11 +37,9 @@ const log = async (fn) => {
   if (!tld) {
     return console.error(`The argument 'tld' is required.`)
   }
-
+  
+  cleanupBefore && await log(now('rm', '--safe', '-y', name))
   const src = await getLatestDeployment()
   await log(now('alias', src, tld))
-
-  if (cleanup) {
-    await log(now('rm', '--safe', '-y', name))
-  }
+  cleanupAfterwards && await log(now('rm', '--safe', '-y', name))
 })()
