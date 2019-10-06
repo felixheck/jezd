@@ -4,7 +4,7 @@ const program = require('commander')
 const execa = require('execa')
 const path = require('path')
 const { name } = require(path.join(process.cwd(), 'now.json'))
-const { version } = require('../package.json')
+const { version } = require('./package.json')
 
 process.on('unhandledRejection', (err) => console.error(err.message))
 
