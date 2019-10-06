@@ -14,9 +14,9 @@ npm i felixheck/jezd
 
 ## Usage
 ```sh
-Usage: jezd [options] <tld>
+Usage: jezd [options] <tld...>
 
-Alias the latest deployment to `tld`
+Alias the latest deployment to one or multiple `tld`
 
 Options:
   -V, --version             output the version number
