@@ -1,0 +1,32 @@
+{
+  "name": "jezd",
+  "version": "1.0.0",
+  "description": "Alias the latest ZEIT Now deployment & optionally cleanup",
+  "main": "index.js",
+  "bin": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixheck/jezd.git"
+  },
+  "keywords": [
+    "zeit",
+    "now",
+    "utils",
+    "deployment",
+    "alias"
+  ],
+  "author": {
+    "name": "Felix Heck",
+    "email": "hi@daheq.com",
+    "url": "https://daheq.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felixheck/jezd/issues"
+  },
+  "homepage": "https://github.com/felixheck/jezd#readme",
+  "dependencies": {
+    "commander": "^3.0.2",
+    "execa": "^2.0.5"
+  }
+}
