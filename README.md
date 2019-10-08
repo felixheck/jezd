@@ -9,14 +9,14 @@
 
 ## Install
 ```sh
-npm i felixheck/jezd
+npm i -g felixheck/jezd
 ```
 
 ## Usage
 ```sh
-Usage: jezd [options] <tld...>
+Usage: jezd [options] <fqdn...>
 
-Alias the latest deployment to one or multiple `tld`
+Alias the latest deployment to one or multiple `fqdn`
 
 Options:
   -V, --version             output the version number
@@ -25,6 +25,8 @@ Options:
   -a, --cleanup-afterwards  remove unaliased deployments afterwards
   -h, --help                output usage information
 ```
+
+You need to be logged in or pass a token.
 
 ## License
 The MIT License
