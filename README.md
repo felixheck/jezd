@@ -3,6 +3,7 @@
 
 1. [Install](#install)
 1. [Usage](#usage)
+1. [GitHub Action Example](#github-action-example)
 1. [License](#license)
 
 ---
@@ -27,6 +28,43 @@ Options:
 ```
 
 You need to be logged in or pass a token.
+
+## GitHub Action Example
+
+- Cleanup all unaliased deployments first
+- Push to `master`: deploy and alias to `foobar.com`
+- Push to another branch: deploy and alias to `foobar.dev`
+- **Result:**
+    - A *dev* & *prod* environment
+    - The last state which was aliased before the deployment for easy rollbacks 
+
+```yaml
+on: push
+name: daheq
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: install
+      run: npm i && npm i -g --ignore-scripts now && now -v
+    - name: install jezd
+      run: npm i -g felixheck/jezd && jezd -V
+    - name: generate static files
+      run: npm run build
+    - name: deploy static files
+      run: now --token=${{ secrets.ZEIT_TOKEN }} -A ../now.json dist/
+    - name: alias to .dev
+      run: jezd --token=${{ secrets.ZEIT_TOKEN }} -b foobar.dev
+      if: "!contains(github.ref, 'master')"
+    - name: alias to .com
+      run: jezd --token=${{ secrets.ZEIT_TOKEN }} -b foobar.com
+      if: contains(github.ref, 'master')
+
+```
 
 ## License
 The MIT License
