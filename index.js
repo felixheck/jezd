@@ -25,7 +25,7 @@ const now = (...args) => execa('now', [...tkn, ...args])
 
 const getLatestDeployment = async () => {
   const { stdout } = await now('ls', name)
-  console.log(std);
+  console.log(stdout);
   return stdout.split('\n')[1].split(' ').filter(x => x)[1]
 }
 
