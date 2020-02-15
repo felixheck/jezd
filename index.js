@@ -3,7 +3,7 @@
 const program = require('commander')
 const execa = require('execa')
 const path = require('path')
-const { name } = require(path.join(process.cwd(), 'now.json'))
+const { name } = require(path.join(process.cwd(), 'package.json'))
 const { version } = require('./package.json')
 
 process.on('unhandledRejection', (err) => console.error(err.message))
@@ -25,7 +25,6 @@ const now = (...args) => execa('now', [...tkn, ...args])
 
 const getLatestDeployment = async () => {
   const { stdout } = await now('ls', name)
-  console.log(stdout);
   return stdout.split('\n')[1].split(' ').filter(x => x)[1]
 }
 
